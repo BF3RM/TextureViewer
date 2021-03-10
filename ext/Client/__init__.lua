@@ -51,9 +51,10 @@ end
 
 function TextureViewerClient:HandleTextureAsset(p_Instance)
 	-- 3ti: it will crash after loading, if you dont filter. this filters for background trees (kinda)
-	if (string.match(p_Instance.name:lower(), 'tree') or string.match(p_Instance.name:lower(), '2d') or string.match(p_Instance.name:lower(), 'undergrowth') or (string.match(p_Instance.name:lower(), 'backdrop') and string.match(p_Instance.name:lower(), 'characterbackdrop') == false)) then
-		print(p_Instance.name)
-		table.insert(self.m_Textures, tostring(p_Instance.name))
+	local s_Instance = TextureAsset(p_Instance)
+	if (string.match(s_Instance.name:lower(), 'tree') or string.match(s_Instance.name:lower(), '2d') or string.match(s_Instance.name:lower(), 'undergrowth') or (string.match(s_Instance.name:lower(), 'backdrop') and string.match(s_Instance.name:lower(), 'characterbackdrop') == false)) then
+		print(s_Instance.name)
+		table.insert(self.m_Textures, tostring(s_Instance.name))
 	end
 end
 
