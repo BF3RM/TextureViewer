@@ -1,0 +1,9 @@
+{
+	"Name": "textureviewer",
+	"Authors": ["Powback"],
+	"Description": "Displays all textures in a webui",
+	"URL": "none",
+	"Version": "1.0.0",
+	"HasWebUI": true,
+	"HasVeniceEXT": true
+}

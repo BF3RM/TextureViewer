@@ -1,0 +1,54 @@
+<html>
+	<head>
+	</head>
+
+	<body>
+		<div id="container" width="100%" height="100%">
+		</div>
+
+		<script>
+			function AddImage(path) {
+				console.log(path);
+				testImage("fb://" + path, record)
+			}
+
+			function testImage(url, callback, timeout) {
+			    timeout = timeout || 5000;
+			    var timedOut = false, timer;
+			    var img = new Image();
+			    img.onerror = img.onabort = function() {
+			        if (!timedOut) {
+			            clearTimeout(timer);
+			            callback(url, "error", img);
+			        }
+			    };
+			    img.onload = function() {
+			        if (!timedOut) {
+			            clearTimeout(timer);
+			            callback(url, "success", img);
+			        }
+			    };
+			    img.src = url;
+			    timer = setTimeout(function() {
+			        timedOut = true;
+			        // reset .src to invalid URL so it stops previous
+			        // loading, but doesn't trigger new load
+			        img.src = "//!!!!/test.jpg";
+			        callback(url, "timeout", img);
+			    }, timeout); 
+			}
+
+			function record(url, result, img) {
+				if(result == "success") {
+					var container = document.createElement("div");
+					var label = document.createElement("span");
+					label.innerHTML = url;
+					container.appendChild(label);
+					container.appendChild(img)
+
+					document.getElementById("container").appendChild(container);
+				}
+			}   
+		</script>
+	</body>
+</html>
